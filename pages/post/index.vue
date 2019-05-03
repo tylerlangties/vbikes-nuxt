@@ -1,24 +1,29 @@
 <template>
-  <section class="container">
-    <div class="title">Blog</div>
-    <div v-if="recentPostsLoaded" class="container">
-      <div class="row blog">
-        <BlogCard v-for="post in recentPosts(limit)" :key="post.id" :post="post"/>
+  <div>
+    <Banner title="Blog"/>
+    <section class="container">
+      <div class="title">Blog</div>
+      <div v-if="recentPostsLoaded" class="container">
+        <div class="row blog">
+          <BlogCard v-for="post in recentPosts(limit)" :key="post.id" :post="post"/>
+        </div>
+        <div class="loadmore">
+          <b-button v-if="!allPostsLoaded" class="loadmore-button" @click="loadMore">Load More</b-button>
+          <h5 v-else>Showing All Posts</h5>
+        </div>
       </div>
-      <div class="loadmore">
-        <b-button v-if="!allPostsLoaded" class="loadmore-button" @click="loadMore">Load More</b-button>
-        <h5 v-else>Showing All Posts</h5>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
+import Banner from '~/components/Banner.vue'
 import BlogCard from '../../components/partials/Blog/BlogCard.vue'
 export default {
   components: {
-    BlogCard
+    BlogCard,
+    Banner
   },
   data() {
     return {

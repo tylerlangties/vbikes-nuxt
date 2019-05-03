@@ -1,7 +1,11 @@
 <template>
   <div v-if="menu">
     <b-navbar class="nav" toggleable="lg" type="dark">
-      <b-navbar-brand href="/">vb</b-navbar-brand>
+      <b-navbar-brand>
+        <nuxt-link to="/">
+          <BrandLogo/>
+        </nuxt-link>
+      </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -16,6 +20,9 @@
           <b-nav-item v-for="item in menu" :key="item.ID">
             <nuxt-link :to="{name: 'slug', params: { slug: item.slug } }">{{item.title}}</nuxt-link>
           </b-nav-item>
+          <b-nav-item>
+            <nuxt-link to="/contact">Contact</nuxt-link>
+          </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-form>
@@ -29,8 +36,12 @@
 </template>
 
 <script>
+import BrandLogo from '~/assets/img/favicon-light.svg'
 export default {
-  props: ['menu']
+  props: ['menu'],
+  components: {
+    BrandLogo
+  }
 }
 </script>
 
@@ -42,6 +53,12 @@ a {
 }
 .navbar {
   background-color: #212121;
+  &-brand {
+    svg {
+      max-width: 3rem;
+      max-height: 3rem;
+    }
+  }
 }
 .logo {
   max-height: 3rem;

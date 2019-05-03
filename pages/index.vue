@@ -1,56 +1,55 @@
 <template>
-  <section class="container">
-    <div>
-      <logo/>
-      <h1 class="title">village-bikes</h1>
-      <h2 class="subtitle">Headless wordpress website made with Nuxt</h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
+  <div>
+    <Hero/>
+    <section class="container">
+      <div class="homepage-content">
+        <b-container>
+          <b-row>
+            <b-col col lg="4" sm="12" xs="12">
+              <h3 class="introduction-title">
+                We're
+                <strong>Village Bikes</strong>
+              </h3>
+            </b-col>
+            <b-col col lg="8" sm="12" xs="12">
+              <p
+                class="introduction-block"
+              >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+            </b-col>
+          </b-row>
+        </b-container>
+        <card-container></card-container>
+        <div class="container products">
+          <h3>Our Products</h3>
+          <Carousel></Carousel>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
+import Hero from '~/components/partials/HomePage/Hero.vue'
+import CardContainer from '~/components/partials/HomePage/CardContainer.vue'
+import Carousel from '~/components/partials/HomePage/Carousel.vue'
 export default {
   components: {
-    Logo
+    Hero,
+    CardContainer,
+    Carousel
   }
 }
 </script>
 
-<style scoped>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+<style scoped lang="scss">
+.homepage-content {
+  padding: 4rem 0.5rem;
+  .introduction-title {
+    margin: 0;
+    padding-right: 1rem;
+  }
 }
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+.products {
+  margin-top: 4rem;
 }
 </style>

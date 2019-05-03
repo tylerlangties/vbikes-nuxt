@@ -1,13 +1,17 @@
 <template>
-  <section class="container">
-    <div>
-      <h1 class="title">{{page.title.rendered}}</h1>
-      <span v-html="page.content.rendered"></span>
-    </div>
-  </section>
+  <div>
+    <Banner :title="page.title.rendered"/>
+    <section class="container">
+      <div class="page-content">
+        <h1 class="title">{{page.title.rendered}}</h1>
+        <span v-html="page.content.rendered"></span>
+      </div>
+    </section>
+  </div>
 </template>
 <script>
 import axios from 'axios'
+import Banner from '~/components/Banner.vue'
 export default {
   head() {
     return {
@@ -37,11 +41,14 @@ export default {
       page: false,
       error: []
     }
+  },
+  components: {
+    Banner
   }
 }
 </script>
 <style lang="scss">
-.container {
+.page-content {
   margin-top: 4rem;
 }
 .title {
