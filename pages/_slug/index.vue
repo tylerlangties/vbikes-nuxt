@@ -28,7 +28,9 @@ export default {
   },
   asyncData({ params }) {
     return axios
-      .get(`http://villagetest.website/wp-json/wp/v2/pages?slug=${params.slug}`)
+      .get(
+        `https://villagetest.website/wp-json/wp/v2/pages?slug=${params.slug}`
+      )
       .then(response => {
         return { page: response.data[0] }
       })
