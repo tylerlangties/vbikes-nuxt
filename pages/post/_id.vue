@@ -30,7 +30,7 @@ export default {
   asyncData({ params }) {
     return axios
       .get(
-        `http://villagetest.website/wp-json/better-rest-endpoints/v1/post/${
+        `https://villagetest.website/wp-json/better-rest-endpoints/v1/post/${
           params.id
         }`
       )
