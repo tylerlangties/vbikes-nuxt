@@ -6,37 +6,37 @@ export default {
   mode: 'spa',
 
   generate: {
-    // routes: function(callback) {
-    //   axios
-    //     .all([
-    //       axios.get(`${Config.wpDomain}${Config.api.posts}`),
-    //       axios.get(`${Config.wpDomain}${Config.api.pages}`)
-    //     ])
-    //     .then(
-    //       axios.spread(function(posts, pages) {
-    //         let postRoutes = posts.data.map(post => {
-    //           return { route: '/post/' + post.id, payload: post }
-    //         })
-    //         let pageRoutes = pages.data.map(page => {
-    //           return { route: '/' + page.slug, payload: page }
-    //         })
-    //         callback(null, pageRoutes.concat(postRoutes))
-    //       }),
-    //       function(err) {
-    //         console.log(err)
-    //       }
-    //     )
-    // }
-    routes: function() {
-      return axios.get(`${Config.wpDomain}${Config.api.pages}`).then(res => {
-        return res.data.map(page => {
-          return {
-            route: '/' + page.slug,
-            payload: page
+    routes: function(callback) {
+      axios
+        .all([
+          axios.get(`${Config.wpDomain}${Config.api.posts}`),
+          axios.get(`${Config.wpDomain}${Config.api.pages}`)
+        ])
+        .then(
+          axios.spread(function(posts, pages) {
+            let postRoutes = posts.data.map(post => {
+              return { route: '/post/' + post.id, payload: post }
+            })
+            let pageRoutes = pages.data.map(page => {
+              return { route: '/' + page.slug, payload: page }
+            })
+            callback(null, pageRoutes.concat(postRoutes))
+          }),
+          function(err) {
+            console.log(err)
           }
-        })
-      })
+        )
     }
+    // routes: function() {
+    //   return axios.get(`${Config.wpDomain}${Config.api.pages}`).then(res => {
+    //     return res.data.map(page => {
+    //       return {
+    //         route: '/' + page.slug,
+    //         payload: page
+    //       }
+    //     })
+    //   })
+    // }
   },
   /*
    ** Headers of the page

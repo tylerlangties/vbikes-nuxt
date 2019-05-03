@@ -1,13 +1,12 @@
 <template>
   <div>
-    <!-- <Banner :title="page.title.rendered"/>
+    <Banner :title="page.title.rendered"/>
     <section class="container">
       <div class="page-content">
         <h1 class="title">{{page.title.rendered}}</h1>
         <span v-html="page.content.rendered"></span>
       </div>
-    </section>-->
-    {{page}}
+    </section>
   </div>
 </template>
 <script>
@@ -27,24 +26,17 @@ export default {
   //     ]
   //   }
   // },
-  async asyncData({ params, error, payload }) {
-    if (payload) {
-      console.log(payload)
-      return { page: payload }
-    } else {
-      console.log(payload)
-      return { page: 'not from payload' }
-    }
-    // return axios
-    //   .get(
-    //     `https://villagetest.website/wp-json/wp/v2/pages?slug=${params.slug}`
-    //   )
-    //   .then(response => {
-    //     return { page: response.data[0] }
-    //   })
-    //   .catch(error => {
-    //     return { error: error }
-    //   })
+  asyncData({ params, error, payload }) {
+    return axios
+      .get(
+        `https://villagetest.website/wp-json/wp/v2/pages?slug=${params.slug}`
+      )
+      .then(response => {
+        return { page: response.data[0] }
+      })
+      .catch(error => {
+        return { error: error }
+      })
   },
   data() {
     return {
@@ -54,6 +46,9 @@ export default {
   },
   components: {
     Banner
+  },
+  created() {
+    console.log(this.context)
   }
 }
 </script>

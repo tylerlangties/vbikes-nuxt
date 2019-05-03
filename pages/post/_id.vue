@@ -1,5 +1,5 @@
 <template>
-  <!-- <section class="container">
+  <section class="container">
     <div class="featured-image" v-if="post.media">
       <img :src="post.media.large">
     </div>
@@ -7,46 +7,39 @@
     <div class="content">
       <span v-html="post.content"></span>
     </div>
-  </section>-->
-  <div>{{post}}</div>
+  </section>
 </template>
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
 import api from '../../api/index'
 export default {
-  // head() {
-  //   return {
-  //     title: this.post.yoast.yoast_wpseo_title,
-  //     meta: [
-  //       {
-  //         hid: 'description',
-  //         id: 'description',
-  //         name: 'description',
-  //         content: this.post.yoast.yoast_wpseo_metadesc
-  //       }
-  //     ]
-  //   }
-  // },
-  async asyncData({ params, error, payload }) {
-    if (payload) {
-      return { post: payload }
-    } else {
-      console.log(payload)
-      return { post: 'not from payload' }
+  head() {
+    return {
+      title: this.post.yoast.yoast_wpseo_title,
+      meta: [
+        {
+          hid: 'description',
+          id: 'description',
+          name: 'description',
+          content: this.post.yoast.yoast_wpseo_metadesc
+        }
+      ]
     }
-    // return axios
-    //   .get(
-    //     `https://villagetest.website/wp-json/better-rest-endpoints/v1/post/${
-    //       params.id
-    //     }`
-    //   )
-    //   .then(response => {
-    //     return { post: response.data }
-    //   })
-    //   .catch(error => {
-    //     return { error: error }
-    //   })
+  },
+  async asyncData({ params, error, payload }) {
+    return axios
+      .get(
+        `https://villagetest.website/wp-json/better-rest-endpoints/v1/post/${
+          params.id
+        }`
+      )
+      .then(response => {
+        return { post: response.data }
+      })
+      .catch(error => {
+        return { error: error }
+      })
   },
   data() {
     return {
