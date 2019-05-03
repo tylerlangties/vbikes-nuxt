@@ -41,7 +41,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      url: 'http://villagetest.website/wp-json/send-contact-form/v1/contact',
+      url: 'https://villagetest.website/wp-json/send-contact-form/v1/contact',
       form: {
         full_name: '',
         email: '',

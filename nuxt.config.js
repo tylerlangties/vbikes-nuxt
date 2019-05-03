@@ -1,6 +1,6 @@
 import pkg from './package'
-import { nextTick } from 'q'
 import axios from 'axios'
+import Config from './assets/config'
 
 export default {
   mode: 'spa',
@@ -9,25 +9,21 @@ export default {
     routes: function(callback) {
       axios
         .all([
-          axios.get(
-            'https://villagetest.website/wp-json/better-rest-endpoints/v1/posts'
-          ),
-          axios.get(
-            'https://villagetest.website/wp-json/better-rest-endpoints/v1/pages'
-          )
+          axios.get(`${Config.wpDomain}${Config.api.posts}`),
+          axios.get(`${Config.wpDomain}${Config.api.pages}`)
         ])
         .then(
           axios.spread(function(posts, pages) {
             let postRoutes = posts.data.map(post => {
-              return '/post/' + post.id
+              return { route: '/post' + post.id, payload: post }
             })
             let pageRoutes = pages.data.map(page => {
-              return '/' + page.slug
+              return { route: '/' + page.slug, payload: page }
             })
             callback(null, pageRoutes.concat(postRoutes))
           }),
           function(err) {
-            return next(err)
+            console.log(err)
           }
         )
     }
