@@ -29,8 +29,10 @@ export default {
   // },
   asyncData(context) {
     if (context.payload) {
+      console.log('in context')
       return { page: context.payload.page }
     } else {
+      console.log(context)
       return { page: 'not from payload' }
     }
     // return axios
