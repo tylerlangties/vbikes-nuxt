@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <!-- <section class="container">
     <div class="featured-image" v-if="post.media">
       <img :src="post.media.large">
     </div>
@@ -7,7 +7,8 @@
     <div class="content">
       <span v-html="post.content"></span>
     </div>
-  </section>
+  </section>-->
+  <div>{{post}}</div>
 </template>
 <script>
 import axios from 'axios'
@@ -27,19 +28,24 @@ export default {
       ]
     }
   },
-  asyncData({ params }) {
-    return axios
-      .get(
-        `https://villagetest.website/wp-json/better-rest-endpoints/v1/post/${
-          params.id
-        }`
-      )
-      .then(response => {
-        return { post: response.data }
-      })
-      .catch(error => {
-        return { error: error }
-      })
+  asyncData(context) {
+    if (context.payload) {
+      return { post: context.payload.post }
+    } else {
+      return { post: 'not from payload' }
+    }
+    // return axios
+    //   .get(
+    //     `https://villagetest.website/wp-json/better-rest-endpoints/v1/post/${
+    //       params.id
+    //     }`
+    //   )
+    //   .then(response => {
+    //     return { post: response.data }
+    //   })
+    //   .catch(error => {
+    //     return { error: error }
+    //   })
   },
   data() {
     return {
