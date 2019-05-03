@@ -15,23 +15,24 @@ import axios from 'axios'
 import { mapGetters } from 'vuex'
 import api from '../../api/index'
 export default {
-  head() {
-    return {
-      title: this.post.yoast.yoast_wpseo_title,
-      meta: [
-        {
-          hid: 'description',
-          id: 'description',
-          name: 'description',
-          content: this.post.yoast.yoast_wpseo_metadesc
-        }
-      ]
-    }
-  },
+  // head() {
+  //   return {
+  //     title: this.post.yoast.yoast_wpseo_title,
+  //     meta: [
+  //       {
+  //         hid: 'description',
+  //         id: 'description',
+  //         name: 'description',
+  //         content: this.post.yoast.yoast_wpseo_metadesc
+  //       }
+  //     ]
+  //   }
+  // },
   asyncData(context) {
     if (context.payload) {
       return { post: context.payload.post }
     } else {
+      console.log(context)
       return { post: 'not from payload' }
     }
     // return axios
