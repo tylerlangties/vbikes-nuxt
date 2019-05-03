@@ -1,46 +1,52 @@
 <template>
   <div>
-    <Banner :title="page.title.rendered"/>
+    <!-- <Banner :title="page.title.rendered"/>
     <section class="container">
       <div class="page-content">
         <h1 class="title">{{page.title.rendered}}</h1>
         <span v-html="page.content.rendered"></span>
       </div>
-    </section>
+    </section>-->
+    {{page}}
   </div>
 </template>
 <script>
 import axios from 'axios'
 import Banner from '~/components/Banner.vue'
 export default {
-  head() {
-    return {
-      title: this.page._yoast_wpseo_title,
-      meta: [
-        {
-          hid: 'description',
-          id: 'description',
-          name: 'description',
-          content: this.page._yoast_wpseo_metadesc
-        }
-      ]
+  // head() {
+  //   return {
+  //     title: this.page._yoast_wpseo_title,
+  //     meta: [
+  //       {
+  //         hid: 'description',
+  //         id: 'description',
+  //         name: 'description',
+  //         content: this.page._yoast_wpseo_metadesc
+  //       }
+  //     ]
+  //   }
+  // },
+  asyncData({ params }, context) {
+    if (context.payload) {
+      return { page: context.payload.page }
+    } else {
+      return { page: 'not from payload' }
     }
-  },
-  asyncData({ params }) {
-    return axios
-      .get(
-        `https://villagetest.website/wp-json/wp/v2/pages?slug=${params.slug}`
-      )
-      .then(response => {
-        return { page: response.data[0] }
-      })
-      .catch(error => {
-        return { error: error }
-      })
+    // return axios
+    //   .get(
+    //     `https://villagetest.website/wp-json/wp/v2/pages?slug=${params.slug}`
+    //   )
+    //   .then(response => {
+    //     return { page: response.data[0] }
+    //   })
+    //   .catch(error => {
+    //     return { error: error }
+    //   })
   },
   data() {
     return {
-      page: false,
+      page: null,
       error: []
     }
   },
