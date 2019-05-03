@@ -29,10 +29,10 @@ export default {
   // },
   async asyncData({ params, error, payload }) {
     if (payload) {
-      console.log(payload, context)
+      console.log(payload)
       return { page: payload }
     } else {
-      console.log(context)
+      console.log(payload)
       return { page: 'not from payload' }
     }
     // return axios
