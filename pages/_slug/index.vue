@@ -27,7 +27,7 @@ export default {
   //     ]
   //   }
   // },
-  asyncData({ params }, context) {
+  asyncData(context) {
     if (context.payload) {
       return { page: context.payload.page }
     } else {
