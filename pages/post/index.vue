@@ -1,5 +1,6 @@
 <template>
   <section class="container">
+    <div class="title">Blog</div>
     <div v-if="recentPostsLoaded" class="container">
       <div class="row blog">
         <BlogCard v-for="post in recentPosts(limit)" :key="post.id" :post="post"/>
@@ -22,18 +23,21 @@ export default {
   data() {
     return {
       limit: 9,
-      allPostsLoaded: null,
+      allPostsLoaded: false,
       postsDisplayed: 9
     }
   },
   computed: {
     ...mapGetters({
       recentPosts: 'posts/recentPosts',
-      recentPostsLoaded: 'posts/recentPostsLoaded'
+      recentPostsLoaded: 'posts/recentPostsLoaded',
+      allCategories: 'categories/allCategories',
+      allCategoriesLoaded: 'categories/allCategoriesLoaded'
     })
   },
   async fetch({ store }) {
     await store.dispatch('posts/getPosts')
+    await store.dispatch('categories/getAllCategories')
   },
   methods: {
     loadMore() {
@@ -52,6 +56,16 @@ export default {
 }
 </script>
 <style lang="scss">
+.title {
+  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  display: block;
+  font-weight: 300;
+  font-size: 100px;
+  color: #35495e;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+}
 .blog {
   margin: 4rem auto 1rem;
   display: flex;

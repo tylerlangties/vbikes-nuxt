@@ -27,7 +27,6 @@ export default {
         )
         .then(response => {
           this.menu = response.data
-          console.log(this.menu)
         })
         .catch(error => console.log('error'))
     }

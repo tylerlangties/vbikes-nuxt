@@ -40,13 +40,9 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang="scss">
 .container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  margin-top: 4rem;
 }
 .title {
   font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
@@ -56,6 +52,7 @@ export default {
   font-size: 100px;
   color: #35495e;
   letter-spacing: 1px;
+  margin-bottom: 2rem;
 }
 .subtitle {
   font-weight: 300;
@@ -66,5 +63,55 @@ export default {
 }
 .links {
   padding-top: 15px;
+}
+
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table th,
+table td {
+  padding: 0.625em;
+  text-align: center;
+}
+@media screen and (max-width: 992px) {
+  table {
+    border: 0;
+    text-align: left;
+    thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+    }
+    td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: 0.8em;
+      text-align: left;
+    }
+    td::before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    td:last-child {
+      border-bottom: 0;
+    }
+  }
 }
 </style>

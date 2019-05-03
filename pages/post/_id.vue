@@ -1,33 +1,39 @@
 <template>
   <section class="container">
-    <div class="featured-image" v-if="post.better_featured_image">
-      <img :src="post.better_featured_image.source_url">
+    <div class="featured-image" v-if="post.media">
+      <img :src="post.media.large">
     </div>
-    <h1 class="title" v-html="post.title.rendered"></h1>
+    <h1 class="title" v-html="post.title"></h1>
     <div class="content">
-      <span v-html="post.content.rendered"></span>
+      <span v-html="post.content"></span>
     </div>
   </section>
 </template>
 <script>
 import axios from 'axios'
+import { mapGetters } from 'vuex'
+import api from '../../api/index'
 export default {
   head() {
     return {
-      title: this.post._yoast_wpseo_title,
+      title: this.post.yoast.yoast_wpseo_title,
       meta: [
         {
           hid: 'description',
           id: 'description',
           name: 'description',
-          content: this.post._yoast_wpseo_metadesc
+          content: this.post.yoast.yoast_wpseo_metadesc
         }
       ]
     }
   },
   asyncData({ params }) {
     return axios
-      .get(`http://villagetest.website/wp-json/wp/v2/posts/${params.id}`)
+      .get(
+        `http://villagetest.website/wp-json/better-rest-endpoints/v1/post/${
+          params.id
+        }`
+      )
       .then(response => {
         return { post: response.data }
       })
@@ -40,6 +46,17 @@ export default {
       post: {},
       error: []
     }
+  },
+  // computed: {
+  //   ...mapGetters({
+  //     recentPostsLoaded: 'posts/recentPostsLoaded',
+  //     getPostById: `posts/getPostById`
+  //   })
+  // },
+  created() {
+    api.getPost(this.$route.params.id, post => {
+      console.log(post)
+    })
   }
 }
 </script>

@@ -32,5 +32,9 @@ export const getters = {
     return recent.slice(0, limit)
   },
 
-  recentPostsLoaded: state => state.loaded
+  allPosts: state => state.posts,
+  recentPostsLoaded: state => state.loaded,
+  getPostById: state => id => {
+    return state.posts.find(post => post.id == id)
+  }
 }
