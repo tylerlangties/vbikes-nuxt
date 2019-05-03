@@ -54,9 +54,7 @@ export default {
   //   })
   // },
   created() {
-    api.getPost(this.$route.params.id, post => {
-      console.log(post)
-    })
+    console.log(this.$route)
   }
 }
 </script>

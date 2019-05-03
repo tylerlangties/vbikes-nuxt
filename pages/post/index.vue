@@ -57,6 +57,9 @@ export default {
         console.log('showing all posts')
       }
     }
+  },
+  created() {
+    console.log(this.$route)
   }
 }
 </script>

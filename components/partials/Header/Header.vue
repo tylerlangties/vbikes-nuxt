@@ -23,7 +23,7 @@ export default {
     fetchMenu() {
       axios
         .get(
-          'http://villagetest.website/wp-json/better-rest-endpoints/v1/menus/primary-menu'
+          'https://villagetest.website/wp-json/better-rest-endpoints/v1/menus/primary-menu'
         )
         .then(response => {
           this.menu = response.data
