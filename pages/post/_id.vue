@@ -28,11 +28,11 @@ export default {
   //     ]
   //   }
   // },
-  asyncData(context) {
-    if (context.payload) {
-      return { post: context.payload.post }
+  async asyncData({ params, error, payload }) {
+    if (payload) {
+      return { post: payload }
     } else {
-      console.log(context)
+      console.log(payload)
       return { post: 'not from payload' }
     }
     // return axios
