@@ -27,10 +27,10 @@ export default {
   //     ]
   //   }
   // },
-  asyncData(context) {
-    if (context.payload) {
-      console.log('in context')
-      return { page: context.payload.page }
+  async asyncData({ params, error, payload }) {
+    if (payload) {
+      console.log(payload, context)
+      return { page: payload }
     } else {
       console.log(context)
       return { page: 'not from payload' }

@@ -28,11 +28,11 @@ export default {
     //     )
     // }
     routes: function() {
-      return axios.get(`${Config.wpDomain}${Config.api.posts}`).then(res => {
-        return res.data.map(post => {
+      return axios.get(`${Config.wpDomain}${Config.api.pages}`).then(res => {
+        return res.data.map(page => {
           return {
-            route: '/post/' + post.id,
-            payload: post
+            route: '/' + page.slug,
+            payload: page
           }
         })
       })
