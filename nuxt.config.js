@@ -1,8 +1,37 @@
 import pkg from './package'
+import { nextTick } from 'q'
+import axios from 'axios'
 
 export default {
   mode: 'spa',
 
+  generate: {
+    routes: function(callback) {
+      axios
+        .all([
+          axios.get(
+            'https://villagetest.website/wp-json/better-rest-endpoints/v1/posts'
+          ),
+          axios.get(
+            'https://villagetest.website/wp-json/better-rest-endpoints/v1/pages'
+          )
+        ])
+        .then(
+          axios.spread(function(posts, pages) {
+            let postRoutes = posts.data.map(post => {
+              return '/post/' + post.id
+            })
+            let pageRoutes = pages.data.map(page => {
+              return '/' + page.slug
+            })
+            callback(null, pageRoutes.concat(postRoutes))
+          }),
+          function(err) {
+            return next(err)
+          }
+        )
+    }
+  },
   /*
    ** Headers of the page
    */
